@@ -8,11 +8,19 @@ const Form =() =>{
         confirmpassword:"",
         submitted: false
     });
-    let message;
+    let submitmessage;
     if (formState.submitted){
-        message=<h1>You have submitted the form</h1>
+        submitmessage=<h1>You have submitted the form</h1>
     } else{
-        message=<h1>You haven't submitted the form</h1>
+        submitmessage=<h1>You haven't submitted the form</h1>
+    }
+    let firstname_message;
+    if (formState.firstname < 2){
+        firstname_message=<p>Your first name needs to be at least two characters</p>
+    }
+    let lastname_message;
+    if (formState.lastname < 2){
+        lastname_message=<p>Your last name needs to be at least two characters</p>
     }
     const onChangeHandler = event =>{
         setFormState({
@@ -32,9 +40,11 @@ const Form =() =>{
             <form onSubmit={onSubmitHandler}>
                 <label>First Name:</label>
                 <input type='text' name='firstname' onChange={onChangeHandler}></input>
+                {firstname_message}
                 <br/>
                 <label>Last Name:</label>
                 <input type='text' name='lastname' onChange={onChangeHandler}></input>
+                {lastname_message}
                 <br/>
                 <label>Email:</label>
                 <input type='text' name='email' onChange={onChangeHandler}></input>
@@ -48,7 +58,7 @@ const Form =() =>{
                 <button>Submit</button>
             </form>
             <div>
-                {message}
+                {submitmessage}
                 <p>Your form data:</p>
                 {formState.firstname}
                 <br/>
@@ -63,5 +73,7 @@ const Form =() =>{
         </div>
     )
 
+}
+export default Form;
 }
 export default Form;
